@@ -1,0 +1,72 @@
+{extend name="/layout/base"}
+{block name="body"}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>商品列表</legend>
+</fieldset>
+<div>
+    <a href="{:url('product')}" class="layui-btn layui-btn-small">新增商品</a>
+</div>
+<table class="layui-hide" id="test" lay-filter="test"></table>
+</div>
+{/block}
+{block name="script"}
+<script type="text/html " id="barDemo">
+    <a class="layui-btn layui-btn-xs"  lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        table.render({
+            elem: '#test'
+            ,url:'../product/lists'
+            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            ,cols: [[
+                {field:'id', title: 'ID', sort: true}
+                ,{field:'product_name', title: '商品名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'Sn', title: '商品编号'}
+                ,{field:'amount', title: '商品数量'}
+                ,{field:'describe', title: '商品描述'}
+                ,{field:'common_price', title: '商品原价'}
+                ,{field:'price', title: '商品优惠价'}
+                ,{field:'putaway_time', title: '上架时间'}
+                ,{field:'is_on_sale', title: '是否上架'}
+                ,{field:'is_hot', title: '是否热销'}
+                ,{ width: 200,title:"操作", toolbar:'#barDemo'}
+            ]]
+
+        });
+
+        table.on('tool(test)', function(obj){ //注：tool 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            var data = obj.data;
+            // console(data);
+            if(obj.event === 'edit'){
+                window.location.href = "edit?id=" + data.id;
+                layer.msg('编辑操作');
+            } else if(obj.event === 'del'){
+                layer.confirm('确定要删除吗', function(del){
+                    //向服务端发送删除指令
+                    var id = data.id;//向服务端发送删除指令
+                    var $ = layui.$;
+                    $.ajax({
+                        type:"POST",
+                        url:"../admin/del",
+                        data:{
+                            "id" : id
+                        },
+                        success:function (id) {
+                            if (id){
+                                layer.msg("success");
+                            }else{
+                                layer.msg("fail");
+                            }
+                        }
+                    });
+                    obj.del(); //删除对应行（tr）的DOM结构
+                    layer.close(del);
+                });
+            }
+        });
+    });
+</script>
+{/block}

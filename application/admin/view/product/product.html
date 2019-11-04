@@ -1,0 +1,177 @@
+{extend name="/layout/base"}
+{block name="body"}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>商品管理</legend>
+</fieldset>
+
+<form class="layui-form" action="{:url('product')}" method="post" enctype="multipart/form-data">
+    <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+        <ul class="layui-tab-title">
+            <li class="layui-this">基础设置</li>
+            <li>商品相册</li>
+            <li>商品详情</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">商品名称*</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="product_name" lay-verify="product_name" autocomplete="off" class="layui-input">
+                        </div>
+                    </div></div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">商品编码*</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="Sn" lay-verify="Sn" autocomplete="off" class="layui-input">
+                        </div>
+                    </div></div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">商品数量*</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="amount" lay-verify="amount" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">商品原价格*</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="common_price" lay-verify="common_price" autocomplete="off" class="layui-input">
+                        </div>
+                    </div></div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">商品现价格*</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="price" lay-verify="price" autocomplete="off" class="layui-input">
+                        </div>
+                    </div></div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">分类选择*</label>
+                    <div class="layui-input-inline">
+                        <select name="cat_id" lay-filter="aihao">
+                            <option value="0">顶级分类</option>
+                            {volist name="result" id="result"}
+                            <option value={$result.id}>{$result.cate_name}</option>
+                            {/volist}
+                        </select>
+                    </div></div>
+                <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">上架时间*</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="addtime" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                </div>
+                <!--<div class="layui-form-item">
+                    <label class="layui-form-label">商品logo*</label>
+                    <div class="layui-input-block">
+                        <input type="file" name="logo" id="test20">
+                    </div>
+                </div>-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否上架</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="is_on_sale" value="1" title="上架" checked="">
+                        <input type="radio" name="is_on_sale" value="0" title="不上架">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否热销</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="is_hot" value="1" title="热销" checked="">
+                        <input type="radio" name="is_hot" value="0" title="不热销">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <label class="layui-form-label form-require">商品图片* </label>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn" id="test1">选择商品图片*</button>
+                    <div class="layui-upload-list">
+                        <img class="layui-upload-img" id="demo1">
+                        <p id="demoText"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="layer-form-group">
+                    <label class="layui-form-label form-require">商品详情： </label>
+                    <div class="layui-col-sm7  layer-midd-left">
+										<!--<textarea id="container" name="goods[goods_content]" type="text/plain">-->
+										<!--</textarea>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+{/block}
+{block name="script"}
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function() {
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/upload/'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
+        });
+
+
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+    });
+
+    //监听提交
+    form.on('submit(demo1)', function(data){
+        layer.alert(JSON.stringify(data.field), {
+            title: '最终的提交信息'
+        })
+        return false;
+    });
+</script>
+{/block}
