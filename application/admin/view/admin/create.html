@@ -20,13 +20,24 @@
                 <input type="password" name="password" lay-verify="password" autocomplete="off" class="layui-input">
             </div>
         </div></div>
+    <!--<div class="layui-form-item">-->
+    <!--<div class="layui-inline">-->
+        <!--<label class="layui-form-label">管理员邮箱*</label>-->
+        <!--<div class="layui-input-inline">-->
+            <!--<input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+    <!--</div></div>-->
     <div class="layui-form-item">
-    <div class="layui-inline">
-        <label class="layui-form-label">管理员邮箱*</label>
+        <label class="layui-form-label">管理员角色*</label>
         <div class="layui-input-inline">
-            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+            <select name="interest" lay-filter="aihao">
+                <option value=""></option>
+                {volist name="result" id="vo"}
+                <option value="{$vo.id}">{$vo.title}</option>
+                {/volist}
+            </select>
         </div>
-    </div></div>
+    </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>

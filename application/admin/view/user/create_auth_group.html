@@ -1,0 +1,58 @@
+{extend name="/layout/base"}
+{block name="body"}
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>添加角色</legend>
+</fieldset>
+
+<form class="layui-form" action="{:url('create_auth_group')}" method="post">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">角色名称*</label>
+            <div class="layui-input-inline">
+                <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
+            </div>
+        </div></div>
+    <div class="layui-form-item">
+        <div class="layui-form-item">
+            <div class="layui-form-item">
+                <label class="layui-form-label">网站角色*</label>
+                <div class="layui-input-block">
+                    {volist name="data" id="vo"}
+                    <input type="checkbox" value="{$vo.id}" name="like" title="{$vo.title}">
+                    {/volist}
+                </div>
+            </div>
+        </div></div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+        </div>
+    </div>
+</form>
+{/block}
+{block name="script"}
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('submit(demo1)', function(data){
+            //获取checkbox[name='like']的值
+            var arr = new Array();
+            $("input:checkbox[name='like']:checked").each(function(i){
+                arr[i] = $(this).val();
+            });
+            data.field.like = arr.join(",");//将数组合并成字符串
+            $.post("create_auth_group.php", {data:data.field}, function (res) {
+                if (res.code == 1) {
+                    layer.msg(res.msg, {time: 1800, icon: 1}, function () {
+                        location.href = "create_auth_group";
+                    });
+                } else {
+                    layer.msg(res.msg, {time: 1800, icon: 2});
+                }
+            }, 'json');
+
+            return false;
+        });
+    });
+</script>
+{/block}

@@ -4,8 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "296bd8a1d28e39d56dcd80ce7be249f3",
+    "content-hash": "ee54386ce3e673f62e666fb436f8d0cd",
     "packages": [
+        {
+            "name": "dh2y/think-auth",
+            "version": "2.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cinaofdai/think-auth.git",
+                "reference": "dfe078e72bb4fc04b58a2e3a1d9d31d7897bd14b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cinaofdai/think-auth/zipball/dfe078e72bb4fc04b58a2e3a1d9d31d7897bd14b",
+                "reference": "dfe078e72bb4fc04b58a2e3a1d9d31d7897bd14b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "think\\auth\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "dh2y",
+                    "email": "xiaodai54_long@163.com"
+                }
+            ],
+            "description": "auth and identity for thinkphp5",
+            "time": "2019-03-16T07:44:24+00:00"
+        },
         {
             "name": "topthink/framework",
             "version": "v5.1.38.1",
@@ -56,6 +92,45 @@
                 "thinkphp"
             ],
             "time": "2019-08-12T00:58:30+00:00"
+        },
+        {
+            "name": "topthink/think-captcha",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/top-think/think-captcha.git",
+                "reference": "54c8a51552f99ff9ea89ea9c272383a8f738ceee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/top-think/think-captcha/zipball/54c8a51552f99ff9ea89ea9c272383a8f738ceee",
+                "reference": "54c8a51552f99ff9ea89ea9c272383a8f738ceee",
+                "shasum": ""
+            },
+            "require": {
+                "topthink/framework": "5.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "think\\captcha\\": "src/"
+                },
+                "files": [
+                    "src/helper.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "yunwuxin",
+                    "email": "448901948@qq.com"
+                }
+            ],
+            "description": "captcha package for thinkphp5",
+            "time": "2017-12-31T16:37:49+00:00"
         },
         {
             "name": "topthink/think-installer",
