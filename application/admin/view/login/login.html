@@ -100,13 +100,19 @@
 
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">登陆</button>
+                <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="create">登陆</button>
             </div>
         </div>
         <!--<a href="" class="font-set">忘记密码?</a>  <a href="" class="font-set">立即注册</a>-->
     </div>
 </form>
+<script src="/admin/js/good.js"></script>
 <script type="text/javascript" src="http://c.shop.com/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/admin/js/'
+    }).use('good');
+</script>
 <script>
     layui.use(['form', 'layedit', 'laydate'], function(){
         var form = layui.form
