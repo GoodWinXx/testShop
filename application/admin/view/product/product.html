@@ -95,6 +95,7 @@
                 </div>
             </div>
             <div class="layui-tab-item">
+                <input type="hidden" name="url" value="">
                 <label class="layui-form-label form-require">商品图片* </label>
                 <div class="layui-upload">
                 <button type="button" class="layui-btn" id="test1">商品图片上传</button>
@@ -121,25 +122,33 @@
 {/block}
 {block name="script"}
 <script>
+    var upurl = "{:url('product/upload')}";
     layui.use(['form', 'layedit', 'laydate','upload'], function() {
-        var upload = layui.upload;
+        var $ = layui.jquery
+            ,upload = layui.upload;
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate;
 
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#test1' //绑定元素
-            ,url: 'product/product' //上传接口
-            ,done: function(res){
-                //上传完毕回调
+        //多图片上传
+        upload.render({
+            elem: '#test1'
+            ,url: upurl
+            ,multiple: true
+            ,auto:true
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img style="width: 100px" src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img">')
+                });
             }
-            ,error: function(){
-                //请求异常回调
+            ,done: function(res){
+                //上传完毕
+                layer.close(layer.msg('上传成功！'));
+                $('.upload-img-box').append('<dd class="upload-icon-img" ><div class="upload-pre-item"><i οnclick="deleteImg($(this))"   class="layui-icon"></i><img src="' + res.data + '" class="img" ><input type="hidden" name="case_images[]" value="' + res.data + '" /></div></dd>');
             }
         });
-
 
 
         //日期
@@ -152,11 +161,11 @@
     });
 
     //监听提交
-    form.on('submit(demo1)', function(data){
-        layer.alert(JSON.stringify(data.field), {
-            title: '最终的提交信息'
-        })
-        return false;
-    });
+    // form.on('submit(demo1)', function(data){
+    //     layer.alert(JSON.stringify(data.field), {
+    //         title: '最终的提交信息'
+    //     })
+    //     return false;
+    // });
 </script>
 {/block}

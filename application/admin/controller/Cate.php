@@ -32,11 +32,6 @@ class Cate extends BaseController
         return $this->listsData($lists['data'],$lists['total']);
     }
 
-    public function listsData($data, $total)
-    {
-        return json(['code' => 0, 'data' => $data, 'count' => $total]);
-    }
-
     public function Cate()
     {
         $data = Db::name('cate')->select();
@@ -102,5 +97,11 @@ class Cate extends BaseController
             }
         }
         return $this->fetch();
+    }
+
+    public function del()
+    {
+        $id = input('id');
+        Db::name('cate')->where('id',$id)->delete();
     }
 }

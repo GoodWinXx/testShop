@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="http://c.shop.com/themes/css/core.css">
+    <link rel="stylesheet" href="http://c.shop.com/themes/css/icon.css">
+    <link rel="stylesheet" href="http://c.shop.com/themes/css/home.css">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
+</head>
+<body>
+
+<header class="aui-header-default aui-header-fixed aui-header-bg">
+    <a href="javascript:history.back(-1)" class="aui-header-item">
+        <i class="aui-icon aui-icon-back-white"></i>
+    </a>
+    <div class="aui-header-center aui-header-center-clear">
+        <div class="aui-header-center-logo">
+            <div class="aui-car-white-Typeface">购物车(6)</div>
+        </div>
+    </div>
+    <a href="#" class="aui-header-item-icon"   style="min-width:0">
+        <i class="aui-icon aui-icon-member"></i>
+    </a>
+</header>
+<section class="aui-car-content">
+    <div class="aui-car-box">
+        <div class="aui-car-box-name">
+            <input type="checkbox" class="check goods-check shopCheck">
+            <h3>
+                <a href="#">优购优品网</a>
+            </h3>
+            <div class="aui-car-coupons">
+                <a href="#">领券</a>
+                <a href="#">编辑</a>
+            </div>
+        </div>
+        <div class="aui-car-box-list">
+            <ul>
+                {foreach $result as $data}
+                <li>
+                    <div class="aui-car-box-list-item">
+                        <input type="checkbox" class="check goods-check goodsCheck">
+                        <div class="aui-car-box-list-img">
+                            <a href="ui-product.html">
+                                <img src="http://c.shop.com/themes/img/pd/sf-1.jpg" alt="">
+                            </a>
+                        </div>
+                        <div class="aui-car-box-list-text">
+                            <h4>
+                                <a href="ui-product.html">{$data.product_name}</a>
+                            </h4>
+                            <div class="aui-car-box-list-text-brief">
+                                <span>重量:3.3kg</span>
+                                <span>颜色:标配版</span>
+                                <span>版本:5.7英寸</span>
+                            </div>
+                            <div class="aui-car-box-list-text-price">
+                                <div class="aui-car-box-list-text-pri">
+                                    ￥<b class="price">{$data.price}</b>
+                                </div>
+                                <div class="aui-car-box-list-text-arithmetic">
+                                    <a href="javascript:;" class="minus">-</a>
+                                    <span class="num">1</span>
+                                    <a href="javascript:;" class="plus">+</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+        <!--<div class="aui-shopPrice">
+            本店总计：￥
+            <span class="aui-total-amount ShopTotal">{$data.price}</span>
+        </div>-->
+    </div>
+</section>
+<div class="aui-payment-bar">
+    <div class="all-checkbox"><input type="checkbox" class="check goods-check" id="AllCheck">全选</div>
+    <div class="shop-total">
+        <strong>合计：<i class="total" id="AllTotal">{$data.price}</i></strong>
+    </div>
+    <a href="{:url('order/order',['id'=>$data['id']])}" class="settlement">结算</a>
+</div>
+<script src="http://c.shop.com/themes/js/jquery.min.js"></script>
+<script src="http://c.shop.com/themes/js/aui-car.js"></script>
+
+</body>
+</html>

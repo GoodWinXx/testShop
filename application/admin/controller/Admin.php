@@ -30,11 +30,6 @@ class Admin extends BaseController
         return $this->listsData($lists['data'],$lists['total']);
     }
 
-    public function listsData($data, $total)
-    {
-        return json(['code' => 0, 'data' => $data, 'count' => $total]);
-    }
-
     public function create()
     {
         $result = Db::name('auth_group')->select();

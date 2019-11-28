@@ -31,4 +31,9 @@ class BaseController extends Controller
                     location.href="http://c.shop.com/index.php/admin/welcome/welcome";</script>';
             }
     }
+
+    public function listsData($data, $total)
+    {
+        return json(['code' => 0, 'data' => $data, 'count' => $total]);
+    }
 }

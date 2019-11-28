@@ -34,6 +34,7 @@
 <script>
     layui.use('form', function(){
         var form = layui.form;
+        $ = layui.$;
         form.on('submit(demo1)', function(data){
             //获取checkbox[name='like']的值
             var arr = new Array();
@@ -41,13 +42,10 @@
                 arr[i] = $(this).val();
             });
             data.field.like = arr.join(",");//将数组合并成字符串
-            $.post("create_auth_group.php", {data:data.field}, function (res) {
-                if (res.code == 1) {
-                    layer.msg(res.msg, {time: 1800, icon: 1}, function () {
-                        location.href = "create_auth_group";
-                    });
-                } else {
-                    layer.msg(res.msg, {time: 1800, icon: 2});
+            // console.log(data.field);
+            $.post("create_auth_group", {data:data.field},function (data) {
+                if (data==1){
+                    location.href = "create_auth_group";
                 }
             }, 'json');
 

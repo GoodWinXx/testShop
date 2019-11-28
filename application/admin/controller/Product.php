@@ -30,11 +30,6 @@ class Product extends BaseController
         return $this->listsData($lists['data'],$lists['total']);
     }
 
-    public function listsData($data, $total)
-    {
-        return json(['code' => 0, 'data' => $data, 'count' => $total]);
-    }
-
     public function photos(){
         $lists = Db::name('product')->paginate(15)->toArray();
         $this->assign('lists',$lists);
@@ -46,13 +41,33 @@ class Product extends BaseController
         return json(['code' => 0, 'data' => $data, 'count' => $total]);
     }
 
+    public function upload()
+    {
+        $pathName  =  $this->request->param('upload');//图片存放的目录
+        $file = request()->file('file');//获取文件信息
+        $path =  'upload' . (!empty($pathName) ? $pathName : 'case_images');//文件目录
+        //创建文件夹
+        if(!is_dir($path)){
+            mkdir($path, 0755, true);
+        }
+        $info = $file->move($path);//保存在目录文件下
+        if ($info && $info->getPathname()) {
+            $data = [
+                'status' => 1,
+                'data' =>  '/'.$info->getPathname(),
+            ];
+            echo exit(json_encode($data));
+        } else {
+            echo exit(json_encode($file->getError()));
+        }
+    }
+
     public function product()
     {
         $result = Db::name('cate')->select();
         foreach ($result as $k => $v){
             $result[$k]['cate_name'] = str_repeat("-",$v['level']).$v['cate_name'];
         }
-        //var_dump($result);exit;
         $this->assign("result",$result);
         if (request()->isPost()){
             $data = [
