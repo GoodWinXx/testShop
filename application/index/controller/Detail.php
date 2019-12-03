@@ -23,8 +23,30 @@ class Detail extends BaseController
     {
         if (request()->isPost()){
             $productId = input('productId');
+            $product = [
+                'uid' => '1',
+                'product_id' => $productId,
+                'number' => '1',
+                'status' => '1',
+                'create_time' => time(),
+            ];
+            if (Db::name('shop_cart')->insert($product)){
+//                echo 1;exit;
+                $response = array(
+                    'errno' => '1',
+                    'errmsg' => "success",
+                    'data' => true,
+                );
+                return json_encode($response);
+            }else{
+                $response = array(
+                    'errno' => '-1',
+                    'errmsg' => "fail",
+                    'data' => false,
+                );
+                return json_encode($response);
+            }
         }
-        echo 2;
     }
 
     public function detail()

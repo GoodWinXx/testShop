@@ -11,6 +11,7 @@ namespace app\admin\controller;
 
 use think\Controller;
 use think\Db;
+use think\facade\Request;
 
 class Product extends BaseController
 {
@@ -54,16 +55,19 @@ class Product extends BaseController
         if ($info && $info->getPathname()) {
             $data = [
                 'status' => 1,
-                'data' =>  '/'.$info->getPathname(),
+                'data' =>  Request::instance()->domain().'/'.$info->getPathname(),
             ];
-            echo exit(json_encode($data));
+//            dump($data);exit;
+            return json_encode($data);
         } else {
-            echo exit(json_encode($file->getError()));
+            return json_encode($file->getError());
         }
     }
 
     public function product()
     {
+        $url = input('url');
+        dump($url);exit;
         $result = Db::name('cate')->select();
         foreach ($result as $k => $v){
             $result[$k]['cate_name'] = str_repeat("-",$v['level']).$v['cate_name'];

@@ -21,7 +21,7 @@
     </a>
     <div class="aui-header-center aui-header-center-clear">
         <div class="aui-header-center-logo">
-            <div class="aui-car-white-Typeface">购物车(6)</div>
+            <div class="aui-car-white-Typeface">购物车({$result_length})</div>
         </div>
     </div>
     <a href="#" class="aui-header-item-icon"   style="min-width:0">
@@ -47,13 +47,13 @@
                     <div class="aui-car-box-list-item">
                         <input type="checkbox" class="check goods-check goodsCheck">
                         <div class="aui-car-box-list-img">
-                            <a href="ui-product.html">
+                            <a href="{:url('detail/detail',['id'=>$data['id']])}">
                                 <img src="http://c.shop.com/themes/img/pd/sf-1.jpg" alt="">
                             </a>
                         </div>
                         <div class="aui-car-box-list-text">
                             <h4>
-                                <a href="ui-product.html">{$data.product_name}</a>
+                                <a href="{:url('detail/detail',['id'=>$data['id']])}">{$data.product_name}</a>
                             </h4>
                             <div class="aui-car-box-list-text-brief">
                                 <span>重量:3.3kg</span>

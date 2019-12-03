@@ -28,4 +28,12 @@ class Login extends Controller
         }
         return $this->fetch();
     }
+
+    public function logout()
+    {
+        //销毁session
+        session("user", NULL);
+        //跳转页面
+        $this->redirect('login/login');
+    }
 }

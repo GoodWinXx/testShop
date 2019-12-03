@@ -88,23 +88,33 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <input type="hidden" name="url" value="1">
+                    <label class="layui-form-label form-require">商品图片* </label>
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn" id="test1">商品图片上传</button>
+                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                            预览图：
+                            <div class="layui-upload-list" id="demo2"></div>
+                        </blockquote>
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
             </div>
-            <div class="layui-tab-item">
-                <input type="hidden" name="url" value="">
-                <label class="layui-form-label form-require">商品图片* </label>
-                <div class="layui-upload">
-                <button type="button" class="layui-btn" id="test1">商品图片上传</button>
-                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                    预览图：
-                    <div class="layui-upload-list" id="demo2"></div>
-                </blockquote>
-            </div>
-            </div>
+            <!--<div class="layui-tab-item">-->
+                <!--<input type="hidden" name="url" value="">-->
+                <!--<label class="layui-form-label form-require">商品图片* </label>-->
+                <!--<div class="layui-upload">-->
+                <!--<button type="button" class="layui-btn" id="test1">商品图片上传</button>-->
+                <!--<blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">-->
+                    <!--预览图：-->
+                    <!--<div class="layui-upload-list" id="demo2"></div>-->
+                <!--</blockquote>-->
+            <!--</div>-->
+            <!--</div>-->
             <!--<div class="layui-tab-item">-->
                 <!--<div class="layer-form-group">-->
                     <!--<label class="layui-form-label form-require">商品详情： </label>-->
@@ -128,7 +138,6 @@
             ,upload = layui.upload;
         var form = layui.form
             , layer = layui.layer
-            , layedit = layui.layedit
             , laydate = layui.laydate;
 
         //多图片上传

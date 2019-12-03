@@ -21,16 +21,6 @@ class ShopCart extends BaseController
 
     public function shopCart()
     {
-        $id = input('id');
-        $data = Db::name('product')->where('id',$id)->find();
-        $product = [
-            'uid' => '1',
-            'product_id' => $id,
-            'number' => '1',
-            'status' => '1',
-            'create_time' => time(),
-        ];
-        Db::name('shop_cart')->insert($product);
         $result = Db::name('shop_cart')->where('status=1')->select();
         foreach ($result as $key=>$value){
             $obj = Db::name('product')->where('id',$value['product_id'])->find();
@@ -38,7 +28,9 @@ class ShopCart extends BaseController
             $result[$key]['price'] = $obj['price'];
             $result[$key]['common_price'] = $obj['common_price'];
         }
+        $result_length = count($result);
         $this->assign('result',$result);
+        $this->assign('result_length',$result_length);
         return $this->fetch();
     }
 }
