@@ -15,12 +15,13 @@ class Order extends BaseController
 {
     public function order()
     {
-        $id = input('id');
-        if (isset($id)){
+        $goodsId = input('goodsId');
+//        dump($goodsId);exit;
+        if (isset($goodsId)){
             Db::name('shop_cart')->where('buynow=1')->delete();
             $buy = [
                 'uid' => 1,
-                'product_id' => $id,
+                'product_id' => $goodsId,
                 'number' => 1,
                 'status' => 1,
                 'buynow' => 1,
