@@ -43,6 +43,7 @@ class User extends BaseController
                 'name' => input('name'),
                 'title' => input('title'),
             ];
+//            dump($data);exit;
             if (Db::name('auth_rule')->insert($data)){
                 return $this->success('Success!','auth_rule');
             }else{
@@ -69,10 +70,10 @@ class User extends BaseController
         $this->assign('data',$data);
         if (request()->isPost()){
             $result =[
-                'title' => input('title'),
+                'title' => input('name'),
                 'rules' => input('like'),
             ];
-//            dump($result);exit;
+            dump($result);exit;
             if (Db::name('auth_group')->insert($result)){
                 return $this->success('Success!','auth_group');
             }else{

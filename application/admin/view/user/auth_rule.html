@@ -1,10 +1,10 @@
 {extend name="/layout/base"}
 {block name="body"}
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>角色列表</legend>
+    <legend>权限列表</legend>
 </fieldset>
 <div>
-    <a href="{:url('create_auth_group')}" class="layui-btn layui-btn-small">新增角色</a>
+    <a href="{:url('createAuthRule')}" class="layui-btn layui-btn-small">新增权限</a>
 </div>
 <table class="layui-hide" id="test" lay-filter="test"></table>
 {/block}
@@ -18,11 +18,12 @@
         var table = layui.table;
         table.render({
             elem: '#test'
-            ,url:'../user/auth_group_lists'
+            ,url:'../user/lists'
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,cols: [[
                 {field:'id', title: 'ID', sort: true}
-                ,{field:'title', title: '角色名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'name', title: '权限URL'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'title', title: '字段名'}
                 ,{ width: 200,title:"操作", toolbar:'#barDemo'}
             ]]
 
@@ -41,7 +42,7 @@
                     var $ = layui.$;
                     $.ajax({
                         type:"POST",
-                        url:"../user/del_auth_group",
+                        url:"../user/del",
                         data:{
                             "id" : id
                         },

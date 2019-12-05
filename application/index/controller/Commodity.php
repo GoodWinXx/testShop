@@ -22,7 +22,6 @@ class Commodity extends BaseController
     public function commodity()
     {
         $data = Db::name('product')->where('is_on_sale=1')->select();
-//        dump($data);exit;
         $this->assign('data',$data);
         return $this->fetch();
     }

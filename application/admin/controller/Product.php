@@ -67,7 +67,6 @@ class Product extends BaseController
     public function product()
     {
         $url = input('url');
-        dump($url);exit;
         $result = Db::name('cate')->select();
         foreach ($result as $k => $v){
             $result[$k]['cate_name'] = str_repeat("-",$v['level']).$v['cate_name'];

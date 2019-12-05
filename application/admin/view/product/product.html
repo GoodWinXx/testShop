@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <input type="hidden" name="url" value="1">
+                    <input type="hidden" name="url" value="">
                     <label class="layui-form-label form-require">商品图片* </label>
                     <div class="layui-upload">
                         <button type="button" class="layui-btn" id="test1">商品图片上传</button>
@@ -155,7 +155,10 @@
             ,done: function(res){
                 //上传完毕
                 layer.close(layer.msg('上传成功！'));
-                $('.upload-img-box').append('<dd class="upload-icon-img" ><div class="upload-pre-item"><i οnclick="deleteImg($(this))"   class="layui-icon"></i><img src="' + res.data + '" class="img" ><input type="hidden" name="case_images[]" value="' + res.data + '" /></div></dd>');
+                $('.upload-img-box').append('<dd class="upload-icon-img" >' +
+                    '<div class="upload-pre-item"><i οnclick="deleteImg($(this))"   ' +
+                    'class="layui-icon"></i><img src="' + res.data + '" class="img" >' +
+                    '<input type="hidden" name="url" value="' + res.data + '" /></div></dd>');
             }
         });
 

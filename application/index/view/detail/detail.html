@@ -709,7 +709,9 @@
         </div>
         <div class="aui-footer-product-action-list">
             <a href="javascript:;" onclick="addShopCart({$data.id})" class="yellow-color">加入购物车</a>
-            <a href="{:url('order/order')}" class="red-color">立即购买</a>
+            <!--<a href="{:url('order/order')}" onclick="buyNow({$data.id})" class="red-color">立即购买</a>-->
+            <a href="javascript:;" onclick="buyNow({$data.id})" class="red-color">立即购买</a>
+            <!--<a href="{:url('order/order',['id'=>$data['id']])}" class="red-color">立即购买</a>-->
         </div>
     </div>
 </footer>
@@ -717,6 +719,20 @@
 <script src="http://c.shop.com/themes/js/jquery.min.js"></script>
 <script src="http://c.shop.com/themes/js/aui.js"></script>
 <script src="http://c.shop.com/themes/js/aui-down.js"></script>
+<script>
+    function buyNow(goodsId) {
+        var url = "{:url('order/order')}";
+        var data = {"goodsId":goodsId};
+        var success = function (response) {
+            if (response.status=1){
+                window.location.href="{:url('order/order')}";
+            }else {
+                alert("立即购买失败");
+            }
+        };
+        $.post(url,data,success);
+    }
+</script>
 <script>
     function addShopCart(productId) {
         var url = "{:url('detail/addCart')}";

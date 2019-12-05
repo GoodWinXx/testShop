@@ -46,21 +46,22 @@
         </div>
     </div>
     <div class="aui-dri"></div>
+    {foreach $data as $result}
     <div class="aui-list-product-float-item">
         <a href="javascript:;" class="aui-list-product-fl-item">
             <div class="aui-list-product-fl-img">
                 <img src="http://c.shop.com/themes/img/pd/sf-10.jpg" alt="">
             </div>
             <div class="aui-list-product-fl-text">
-                <h3 class="aui-list-product-fl-title">{$data.product_name}</h3>
+                <h3 class="aui-list-product-fl-title">{$result.product_name}</h3>
                 <div class="aui-list-product-fl-mes">
                     <div>
 							<span class="aui-list-product-item-price">
 								<em>¥</em>
-								¥{$data.common_price}
+								{$result.price}
 							</span>
                         <span class="aui-list-product-item-del-price">
-								¥{$data.price}
+								¥{$result.common_price}
 							</span>
                     </div>
                     <div class="aui-btn-purchase">
@@ -74,6 +75,7 @@
             </div>
         </a>
     </div>
+    {/foreach}
     <div class="aui-address-well">
         <a href="#" class="aui-address-cell aui-fl-arrow">
             <div class="aui-address-cell-bd">支持配送</div>
@@ -118,14 +120,14 @@
                 <p>运费(总重:1.978kg)</p>
             </div>
             <div class="aui-address-cell-ft">
-                <span class="aui-red">￥{$data.price}</span><br>
+                <!--<span class="aui-red">￥399.00</span><br>-->
                 <span class="aui-red">+￥0.00</span>
             </div>
         </a>
     </div>
     <div class="aui-payment-bar">
         <div class="shop-total">
-            <span class="aui-red aui-size">实付款: <em>￥{$data.price}</em></span>
+            <span class="aui-red aui-size">实付款: <em>￥{$total}</em></span>
         </div>
         <a href="{:url('settlement/settlement')}" class="settlement">提交订单</a>
     </div>

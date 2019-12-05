@@ -4,12 +4,12 @@
     <legend>添加角色</legend>
 </fieldset>
 
-<form class="layui-form" action="{:url('create_auth_group')}" method="post">
+<form class="layui-form" action="{:url('createAuthGroup')}" method="post">
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">角色名称*</label>
             <div class="layui-input-inline">
-                <input type="text" name="title" lay-verify="title" autocomplete="off" class="layui-input">
+                <input type="text" name="name" lay-verify="title" autocomplete="off" class="layui-input">
             </div>
         </div></div>
     <div class="layui-form-item">
@@ -42,11 +42,10 @@
                 arr[i] = $(this).val();
             });
             data.field.like = arr.join(",");//将数组合并成字符串
-            // console.log(data.field);
-            $.post("create_auth_group", {data:data.field},function (data) {
-                if (data==1){
-                    location.href = "create_auth_group";
-                }
+            $.post("createAuthGroup", {data:data.field},function (data) {
+                // if (data==1){
+                    location.href = "createAuthGroup";
+                // }
             }, 'json');
 
             return false;

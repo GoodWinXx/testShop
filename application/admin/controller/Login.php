@@ -29,7 +29,8 @@ class Login extends Controller
                 dump($data);exit;
             }else{
                 $user = Db::name('admin_user')->where('admin_name','=',input('admin_name'))->find();
-                if ($user['password'] == md5(input('password'))){
+//                if ($user['password'] == md5(input('password'))){
+                if ($user['password'] == input('password')){
                     session('user',$user);
                     return $this->success('登陆成功!','admin/index');
                 }elseif (md5($user['password']) != md5(input('password'))){
@@ -38,5 +39,13 @@ class Login extends Controller
             }
         }
         return $this->fetch();
+    }
+
+    public function logout()
+    {
+        //销毁session
+        session("user", NULL);
+        //跳转页面
+        $this->redirect('admin/login/login');
     }
 }
