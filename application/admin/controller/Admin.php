@@ -84,6 +84,10 @@ class Admin extends BaseController
     public function del()
     {
         $id = input('id');
-        Db::name('admin_user')->where('id',$id)->delete();
+        if (Db::name('admin_user')->where('id',$id)->delete()){
+            return json_encode("success");
+        }else{
+            return json_encode("error");
+        }
     }
 }

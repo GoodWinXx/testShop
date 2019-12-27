@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+name:<input id="name" type="text"><br>
+gender:<input id="gender" type="text"><br>
+address:<input id="address" type="text"><br>
+<button onclick="insert()">submit</button>
+<table border="1px" width="400px">
+    <thead>
+    <th>name</th>
+    <th>gender</th>
+    <th>address</th>
+    </thead>
+    <tbody id="content"></tbody>
+</table>
+<script>
+    function insert() {
+        var u_name = name.value;
+        var u_gender = gender.value;
+        var u_address = address.value;
+        content.innerHTML+="<tr><td>"+u_name+"</td><td>"+u_gender+"</td><td>"+u_address+"</td></tr>";
+    }
+</script>
+</body>
+</html>

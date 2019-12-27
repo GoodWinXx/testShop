@@ -15,22 +15,24 @@ class Index extends BaseController
 
     public function index()
     {
-        $cate1 = Db::name('cate')->where('pid=0')->select();
-        foreach ($cate1 as $key=>$value){
-            $cate1[$key]['child'] = array();
-            $cate2 = Db::name('cate')->where('pid='.$value['id'])->select();
-            foreach ($cate2 as $k=>$v){
-                array_push($cate1[$key]['child'],$v);
-                $cate1[$key]['child'][$k]['child2'] = array();
-                $cate3 = Db::name('cate')->where('pid='.$v['id'])->select();
-                foreach ($cate3 as $v2){
-                    array_push($cate1[$key]['child'][$k]['child2'],$v2);
-                }
-            }
-        }
+        //无限分类前台展示
+//        $cate1 = Db::name('cate')->where('pid=0')->select();
+//        foreach ($cate1 as $key=>$value){
+//            $cate1[$key]['child'] = array();
+//            $cate2 = Db::name('cate')->where('pid='.$value['id'])->select();
+//            foreach ($cate2 as $k=>$v){
+//                array_push($cate1[$key]['child'],$v);
+//                $cate1[$key]['child'][$k]['child2'] = array();
+//                $cate3 = Db::name('cate')->where('pid='.$v['id'])->select();
+//                foreach ($cate3 as $v2){
+//                    array_push($cate1[$key]['child'][$k]['child2'],$v2);
+//                }
+//            }
+//        }
         $data = Db::name('product')->where('is_on_sale=1')->select();
+//        dump($data);exit;
         $this->assign('data',$data);
-        $this->assign('cate1',$cate1);
+//        $this->assign('cate1',$cate1);
 //        $cache = \think\facade\Cache::get("cate");
 //        if ($cache){
 //            return $cache;

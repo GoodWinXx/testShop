@@ -7,9 +7,9 @@
     <meta name="format-detection" content="telephone=no, email=no"/>
     <meta charset="UTF-8">
     <title>购物车</title>
-    <link rel="stylesheet" href="http://c.shop.com/themes/css/core.css">
-    <link rel="stylesheet" href="http://c.shop.com/themes/css/icon.css">
-    <link rel="stylesheet" href="http://c.shop.com/themes/css/home.css">
+    <link rel="stylesheet" href="__PUBLIC__/themes/css/core.css">
+    <link rel="stylesheet" href="__PUBLIC__/themes/css/icon.css">
+    <link rel="stylesheet" href="__PUBLIC__/themes/css/home.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 </head>
@@ -45,15 +45,15 @@
                 {foreach $result as $data}
                 <li>
                     <div class="aui-car-box-list-item">
-                        <input type="checkbox" class="check goods-check goodsCheck">
+                        <input type="checkbox" name="goods" value="{$data['product_id']}" class="check goods-check goodsCheck">
                         <div class="aui-car-box-list-img">
-                            <a href="{:url('detail/detail',['id'=>$data['id']])}">
-                                <img src="http://c.shop.com/themes/img/pd/sf-1.jpg" alt="">
+                            <a href="{:url('detail/detail',['id'=>$data['product_id']])}">
+                                <img src="__PUBLIC__/themes/img/pd/sf-1.jpg" alt="">
                             </a>
                         </div>
                         <div class="aui-car-box-list-text">
                             <h4>
-                                <a href="{:url('detail/detail',['id'=>$data['id']])}">{$data.product_name}</a>
+                                <a href="{:url('detail/detail',['id'=>$data['product_id']])}">{$data.product_name}</a>
                             </h4>
                             <div class="aui-car-box-list-text-brief">
                                 <span>重量:3.3kg</span>
@@ -89,7 +89,9 @@
     </div>
     <a href="{:url('order/order')}" class="settlement">结算</a>
 </div>
-<script src="http://c.shop.com/themes/js/jquery.min.js"></script>
-<script src="http://c.shop.com/themes/js/aui-car.js"></script>
+<script src="__PUBLIC__/themes/js/jquery.min.js"></script>
+<script src="__PUBLIC__/themes/js/aui-car.js"></script>
+<script>
+</script>
 </body>
 </html>

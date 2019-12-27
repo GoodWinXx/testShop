@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+用户名:<input type="text" id="name" onblur="notnull()" onfocus="show_nameMsg()"><br>
+<span id="name_msg"></span><br>
+密码:<input type="password" id="pwd" onfocus="show_pwdMsg()">
+<span id="pwd_msg"></span><br>
+<button>提交</button>
+</body>
+<script>
+    function show_nameMsg() {
+        name_msg.innerHTML="用户名为6～12位";
+    }
+    function notnull() {
+        if(name.value){
+            console.log(name.value);
+            if (name.value.length<6 && name.value.length>12){
+                name_msg.innerHTML="用户名填写规范不正确";
+            }else {
+                name_msg.innerHTML="用户名填写规范正确";
+            }
+        }else {
+            name_msg.innerHTML="用户名为空";
+        }
+    }
+</script>
+</html>

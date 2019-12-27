@@ -18,7 +18,7 @@
                 <label class="layui-form-label">网站角色*</label>
                 <div class="layui-input-block">
                     {volist name="data" id="vo"}
-                    <input type="checkbox" value="{$vo.id}" name="like" title="{$vo.title}">
+                    <input type="checkbox" value="{$vo.id}" name="rules" title="{$vo.title}">
                     {/volist}
                 </div>
             </div>
@@ -33,21 +33,25 @@
 {block name="script"}
 <script>
     layui.use('form', function(){
+        var url = "{:url('user/createAuthGroup')}";
         var form = layui.form;
+        var success = function (response) {
+            if (response.status=1){
+                alert('添加成功');
+                window.location.href="{:url('user/authGroup')}";
+            }else {
+                alert('添加失败');
+            }
+        };
         $ = layui.$;
         form.on('submit(demo1)', function(data){
             //获取checkbox[name='like']的值
             var arr = new Array();
-            $("input:checkbox[name='like']:checked").each(function(i){
+            $("input:checkbox[name='rules']:checked").each(function(i){
                 arr[i] = $(this).val();
             });
-            data.field.like = arr.join(",");//将数组合并成字符串
-            $.post("createAuthGroup", {data:data.field},function (data) {
-                // if (data==1){
-                    location.href = "createAuthGroup";
-                // }
-            }, 'json');
-
+            data.field.rules = arr.join(",");//将数组合并成字符串
+            $.post(url, {data:data.field});
             return false;
         });
     });

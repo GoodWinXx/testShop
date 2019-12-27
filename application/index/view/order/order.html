@@ -7,9 +7,9 @@
     <meta name="format-detection" content="telephone=no, email=no"/>
     <meta charset="UTF-8">
     <title>购物车</title>
-    <link rel="stylesheet" href="http://c.shop.com/themes/css/core.css">
-    <link rel="stylesheet" href="http://c.shop.com/themes/css/icon.css">
-    <link rel="stylesheet" href="http://c.shop.com/themes/css/home.css">
+    <link rel="stylesheet" href="__PUBLIC__/themes/css/core.css">
+    <link rel="stylesheet" href="__PUBLIC__/themes/css/icon.css">
+    <link rel="stylesheet" href="__PUBLIC__/themes/css/home.css">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="iTunesArtwork@2x.png" sizes="114x114" rel="apple-touch-icon-precomposed">
 </head>
@@ -30,38 +30,38 @@
 <section class="aui-address-content">
     <div class="aui-address-box">
         <div class="aui-address-box-list">
-            <a href="my-addres.html" class="aui-address-box-default">
+            <a href="{:url('myaddres/myaddres')}" class="aui-address-box-default">
                 <ul>
                     <li>
-                        <strong>李嘉华 185****6698</strong>
-                        <span class="aui-tag" id="aui-home">家里</span>
-                        <span class="aui-tag aui-tag-default" id="aui-default">默认</span>
+                        <strong>{$address.name} {$address.phone}</strong>
+                        <!--<span class="aui-tag" id="aui-home">家里</span>-->
+                        <!--<span class="aui-tag aui-tag-default" id="aui-default">默认</span>-->
                     </li>
                     <li>
                         <i class="aui-icon aui-icon-address"></i>
-                        北京海淀区三环到四环之间学院路东里33号楼1门202
+                        {$address.province}{$address.address}
                     </li>
                 </ul>
             </a>
         </div>
     </div>
     <div class="aui-dri"></div>
-    {foreach $data as $result}
+    {foreach $result as $data}
     <div class="aui-list-product-float-item">
         <a href="javascript:;" class="aui-list-product-fl-item">
             <div class="aui-list-product-fl-img">
-                <img src="http://c.shop.com/themes/img/pd/sf-10.jpg" alt="">
+                <img src="__PUBLIC__/themes/img/pd/sf-10.jpg" alt="">
             </div>
             <div class="aui-list-product-fl-text">
-                <h3 class="aui-list-product-fl-title">{$result.product_name}</h3>
+                <h3 class="aui-list-product-fl-title">{$data.describe}</h3>
                 <div class="aui-list-product-fl-mes">
                     <div>
 							<span class="aui-list-product-item-price">
 								<em>¥</em>
-								{$result.price}
+								{$data.price}
 							</span>
                         <span class="aui-list-product-item-del-price">
-								¥{$result.common_price}
+								¥{$data.common_price}
 							</span>
                     </div>
                     <div class="aui-btn-purchase">
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="aui-list-product-fl-bag">
-                    <span><img src="http://c.shop.com/themes/img/icon/bag1.png" alt=""></span>
-                    <span><img src="http://c.shop.com/themes/img/icon/bag2.png" alt=""></span>
+                    <span><img src="__PUBLIC__/themes/img/icon/bag1.png" alt=""></span>
+                    <span><img src="__PUBLIC__/themes/img/icon/bag2.png" alt=""></span>
                 </div>
             </div>
         </a>
@@ -129,9 +129,28 @@
         <div class="shop-total">
             <span class="aui-red aui-size">实付款: <em>￥{$total}</em></span>
         </div>
-        <a href="{:url('settlement/settlement')}" class="settlement">提交订单</a>
+        <!--<a href="{:url('settlement/settlement','buynow=1')}" class="settlement">提交订单</a>-->
+        <a href="javascript:;" class="settlement">提交订单</a>
     </div>
-</section>
 
+</section>
+<script src="__PUBLIC__/themes/js/jquery.min.js"></script>
+<script>
+    // $(function () {
+        var url1 = "{:url('settlement/account')}";
+        $('.settlement').click(function () {
+            $.post(url1,{address_id:2,buynow:0},function (result) {
+                if (result.code == 1) {
+                    //订单创建成功
+                    var url = "{:url('settlement/pay')}";
+                    window.location.href=url+'?order_id='+result.data.order_id;
+                } else {
+                    //订单创建失败
+                    alert('订单创建失败');
+                }
+            })
+        })
+    // })
+</script>
 </body>
 </html>

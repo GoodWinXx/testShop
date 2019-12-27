@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+性别:<input type="checkbox" value="10" name="sex" class="cls_sex" id="js_sex"/>男
+<input type="checkbox" value="20" name="sex" class="cls_sex"/>女
+<button id="js-checked">设置女选中</button>
+<a href="javascript:;" data-id="333" class="js-a">删除</a>
+<script>
+    $(function () {
+        $("#js-checked").click(function () {
+            var id = $('.js-a').attr('data-id');
+            $.post(url,{id:id},function (result) {
+                if (result.code == 1) {
+                    //刷新页面
+                }
+            })
+
+            // $('.cls_sex').each(function () {
+            //     if ($(this).val() == 20) {
+            //         // $(this).prop('checked',true);
+            //         // $(this).attr('checked',true);
+            //         alert($(this).attr('name'));
+            //     }
+            // })
+        })
+        // $('#js_sex').click(function () {
+        //     alert($(this).val());
+        // });
+        //
+        // $('.cls_sex').click(function () {
+        //     alert($(this).val());
+        // })
+
+        // $('input[name=sex]').click(function () {
+        //     alert($(this).val());
+        // })
+        //获取id
+        $('.cls_sex').click(function () {
+            // alert(33);
+            $('.cls_sex').each(function (index,item) {
+                if ($(item).attr('checked')) {
+                    alert($(item).val());
+                }
+            })
+        })
+        // var selectedValues = 0;
+        // $("#js_sex:checked").each(function(){
+        //     alert($(this).val());
+        //     // selectedValues.push($(this).val());
+        // });
+        // console.log(selectedValues);
+        // alert(selectedValues);
+        // $("*")
+        // $("#js_sex")
+        // $(".cls_sex")
+        // $(":input")
+        // $(":enabled")
+    })
+</script>
+</body>
+</html>

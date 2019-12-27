@@ -39,12 +39,12 @@ class User extends BaseController
     public function createAuthRule()
     {
         if (request()->isPost()){
-            $data = [
+            $result = [
                 'name' => input('name'),
                 'title' => input('title'),
             ];
 //            dump($data);exit;
-            if (Db::name('auth_rule')->insert($data)){
+            if (Db::name('auth_rule')->insert($result)){
                 return $this->success('Success!','auth_rule');
             }else{
                 return $this->error('Error!','auth_rule');
@@ -68,16 +68,26 @@ class User extends BaseController
     {
         $data = Db::name('auth_rule')->select();
         $this->assign('data',$data);
+
         if (request()->isPost()){
-            $result =[
-                'title' => input('name'),
-                'rules' => input('like'),
-            ];
-            dump($result);exit;
+            $result = input('data');
+//            dump($result);exit;
             if (Db::name('auth_group')->insert($result)){
-                return $this->success('Success!','auth_group');
+                echo 1;
+//                $response = array(
+//                    'status' => '1',
+//                    'msg' => 'success',
+//                    'data' => true,
+//                );
+//                return $response;
             }else{
-                return $this->error('Error!','auth_group');
+                echo 2;
+//                $response = array(
+//                    'status' => '-1',
+//                    'msg' => 'fail',
+//                    'data' => false,
+//                );
+//                return $response;
             }
         }
         return $this->fetch();

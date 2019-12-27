@@ -1,4 +1,5 @@
 $(function(){
+    // alert(1);
 	// 数量减
 	$(".minus").click(function() {
 		var t = $(this).parent().find('.num');
@@ -20,6 +21,14 @@ $(function(){
 	/******------------分割线-----------------******/
 	  // 点击商品按钮
   $(".goodsCheck").click(function() {
+      // alert($(this).is(':checked'));
+      var url = "http://c.shop.com/index.php/index/order/check";
+      var id = $(this).val();
+      if ($(this).is(':checked') == true){
+          $.post(url,{id:id});
+      }else {
+          $.post(url,{id:id});
+      }
     var goods = $(this).closest(".aui-car-box").find(".goodsCheck"); //获取本店铺的所有商品
     var goodsC = $(this).closest(".aui-car-box").find(".goodsCheck:checked"); //获取本店铺所有被选中的商品
     var Shops = $(this).closest(".aui-car-box").find(".shopCheck"); //获取本店铺的全选按钮
@@ -42,6 +51,7 @@ $(function(){
   });
   // 点击店铺按钮
   $(".shopCheck").click(function() {
+      // alert(2);
     if ($(this).prop("checked") == true) { //如果店铺按钮被选中
       $(this).parents(".aui-car-box").find(".goods-check").prop('checked', true); //店铺内的所有商品按钮也被选中
       if ($(".shopCheck").length == $(".shopCheck:checked").length) { //如果店铺被选中的数量等于所有店铺的数量
@@ -59,6 +69,7 @@ $(function(){
   });
   // 点击全选按钮
   $("#AllCheck").click(function() {
+      // alert(3);
     if ($(this).prop("checked") == true) { //如果全选按钮被选中
       $(".goods-check").prop('checked', true); //所有按钮都被选中
       TotalPrice();
@@ -70,6 +81,7 @@ $(function(){
   });
 	//计算
   function TotalPrice() {
+      // alert(4);
     var allprice = 0; //总价
     $(".aui-car-box").each(function() { //循环每个店铺
       var oprice = 0; //店铺总价
